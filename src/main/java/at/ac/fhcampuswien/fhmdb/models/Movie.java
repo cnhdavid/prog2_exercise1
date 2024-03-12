@@ -15,7 +15,7 @@ public class Movie {
     }
 
     public enum Genre {
-        ACTION, ADVENTURE, ANIMATION, BIOGRAPHY, COMEDY, CRIME, DRAMA,
+        ALL, ACTION, ADVENTURE, ANIMATION, BIOGRAPHY, COMEDY, CRIME, DRAMA,
         DOCUMENTARY, FAMILY, FANTASY, HISTORY, HORROR, MUSICAL, MYSTERY,
         ROMANCE, SCIENCE_FICTION, SPORT, THRILLER, WAR, WESTERN,
     }
@@ -37,12 +37,12 @@ public class Movie {
         List<Movie> movies = new ArrayList<>();
 
         // Movie 1
-        Movie movie1 = new Movie("The Adventure Quest", "Description: \"Join our heroes on an epic journey filled with danger, excitement, and unexpected twists as they embark on the ultimate adventure quest to save the world.",
+        Movie movie1 = new Movie("The Adventure Quest", "Join our heroes on an epic journey filled with danger, excitement, and  twists as they embark on the ultimate adventure quest to save the world.",
                 List.of(Genre.ADVENTURE, Genre.FANTASY));
         movies.add(movie1);
 
         // Movie 2
-        Movie movie2 = new Movie("Comedy Chaos", "Description: \"Get ready for non-stop laughter in this hilarious comedy that follows the misadventures of a group of friends trying to navigate the ups and downs of life with a comedic twist.",
+        Movie movie2 = new Movie("Comedy Chaos", "Get ready for non-stop laughter in this hilarious comedy that follows the misadventures of a group of friends trying to navigate the ups and downs of life with a comedic twist.",
                 List.of(Genre.COMEDY, Genre.ROMANCE));
         movies.add(movie2);
 
@@ -52,7 +52,7 @@ public class Movie {
         movies.add(movie3);
 
         // Movie 4
-        Movie movie4 = new Movie("Sci-Fi Odyssey", "\"Embark on a mind-bending journey through time and space in this futuristic sci-fi odyssey. Immerse yourself in a world of advanced technology, alien encounters, and the endless possibilities of the cosmos.",
+        Movie movie4 = new Movie("Sci-Fi Odyssey", "Embark on a mind-bending journey through time and space in this futuristic sci-fi odyssey. Immerse yourself in a world of advanced technology, alien encounters, and the endless possibilities of the cosmos.",
                 List.of(Genre.SCIENCE_FICTION, Genre.ADVENTURE));
         movies.add(movie4);
 

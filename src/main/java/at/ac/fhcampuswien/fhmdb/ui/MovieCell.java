@@ -29,6 +29,14 @@ public class MovieCell extends ListCell<Movie> {
                             : "No description available"
             );
 
+            // Display genres Quelle: chat.openai.com
+            String genreText = "Genres: ";
+            for (Movie.Genre genre : movie.getGenres()) {
+                genreText += genre.toString() + ", ";
+            }
+            // Remove the last comma and space Quelle: chat.openai.com
+            genreText = genreText.substring(0, genreText.length() - 2);
+            detail.setText(detail.getText() + "\n" + genreText);
 
             // color scheme
             title.getStyleClass().add("text-yellow");
