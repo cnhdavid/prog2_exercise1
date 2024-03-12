@@ -7,13 +7,14 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class HomeController implements Initializable {
     @FXML
@@ -56,14 +57,49 @@ public class HomeController implements Initializable {
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
             if(sortBtn.getText().equals("Sort (asc)")) {
-                // TODO sort observableMovies ascending
+
                 sortBtn.setText("Sort (desc)");
+                sortMoviesAscending();
             } else {
-                // TODO sort observableMovies descending
+
                 sortBtn.setText("Sort (asc)");
+                sortMoviesDescending();
             }
         });
-
-
     }
-}
+    private void sortMoviesAscending() {
+        allMovies.sort(Comparator.comparing(Movie::getTitle));
+        movieListView.setItems(FXCollections.observableArrayList(allMovies));
+        movieListView.setCellFactory(movieListView -> new MovieCell());
+    }
+    private void sortMoviesDescending() {
+        allMovies.sort(Comparator.comparing(Movie::getTitle).reversed());
+        movieListView.setItems(FXCollections.observableArrayList(allMovies));
+        movieListView.setCellFactory(movieListView -> new MovieCell());
+    }
+    @FXML
+    private void filterMovies(ActionEvent event) {
+        Reset();
+        String searchText = searchField.getText().trim().toLowerCase();
+        String Genre = genreComboBox.getValue() != null ? genreComboBox.getValue().toString() : "";
+
+        List<Movie> filteredMovies = allMovies.stream()
+                .filter(movie -> movie.getTitle().toLowerCase().contains(searchText) || movie.getDescription().toLowerCase().contains(searchText))
+                .filter(movie -> DoesGenreMatch(movie, Genre))
+                .collect(Collectors.toList());
+        movieListView.setItems(FXCollections.observableArrayList(filteredMovies));
+        movieListView.setCellFactory(movieListView -> new MovieCell());
+    }
+    private void Reset() {
+        genreComboBox.setValue(null);
+        movieListView.setItems(FXCollections.observableArrayList(allMovies));
+        movieListView.setCellFactory(movieListView -> new MovieCell());}
+    private boolean DoesGenreMatch(Movie movie, String selectedGenre) {
+        if (selectedGenre == null || selectedGenre.isEmpty()) {
+            return true;}
+        try {
+            Movie.Genre genre = Movie.Genre.valueOf(selectedGenre.toUpperCase());
+            return movie.getGenres().contains(genre);
+        } catch (IllegalArgumentException e) {
+            return false;}
+    }}
