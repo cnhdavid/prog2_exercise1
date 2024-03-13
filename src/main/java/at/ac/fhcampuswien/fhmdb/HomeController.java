@@ -107,6 +107,7 @@ public class HomeController implements Initializable {
 
         movieListView.setItems(FXCollections.observableArrayList(allMovies));
         movieListView.setCellFactory(movieListView -> new MovieCell());}
+
     private boolean DoesGenreMatch(Movie movie, String selectedGenre) {
         if (selectedGenre == null || selectedGenre.isEmpty()) {
             return true;}
@@ -115,4 +116,11 @@ public class HomeController implements Initializable {
             return movie.getGenres().contains(genre);
         } catch (IllegalArgumentException e) {
             return false;}
-    }}
+    }
+    public List<Movie> filterMoviesByGenre(Movie.Genre genre) {
+        return allMovies.stream()
+                .filter(movie -> movie.getGenres().contains(genre))
+                .collect(Collectors.toList());
+    }
+
+}
