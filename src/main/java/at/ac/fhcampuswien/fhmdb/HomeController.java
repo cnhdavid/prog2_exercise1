@@ -47,7 +47,7 @@ public class HomeController implements Initializable {
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Filter by Genre");
         genreComboBox.getItems().add("ALL"); // "ALL" Option added
-        genreComboBox.getItems().addAll( "ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
+        genreComboBox.getItems().addAll("ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
                 "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
                 "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
                 "WESTERN");
@@ -57,7 +57,7 @@ public class HomeController implements Initializable {
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
-            if(sortBtn.getText().equals("Sort (asc)")) {
+            if (sortBtn.getText().equals("Sort (asc)")) {
 
                 sortBtn.setText("Sort (desc)");
                 sortMoviesAscending();
@@ -68,16 +68,19 @@ public class HomeController implements Initializable {
             }
         });
     }
+
     private void sortMoviesAscending() {
         allMovies.sort(Comparator.comparing(Movie::getTitle));
         movieListView.setItems(FXCollections.observableArrayList(allMovies));
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
+
     private void sortMoviesDescending() {
         allMovies.sort(Comparator.comparing(Movie::getTitle).reversed());
         movieListView.setItems(FXCollections.observableArrayList(allMovies));
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
+
     @FXML
     private void filterMovies(ActionEvent event) {
         String searchText = searchField.getText().trim().toLowerCase();
@@ -99,14 +102,18 @@ public class HomeController implements Initializable {
     private void Reset() {
         genreComboBox.setValue(null);
         movieListView.setItems(FXCollections.observableArrayList(allMovies));
-        movieListView.setCellFactory(movieListView -> new MovieCell());}
+        movieListView.setCellFactory(movieListView -> new MovieCell());
+    }
 
     private boolean doesGenreMatch(Movie movie, String selectedGenre) {
         if (selectedGenre == null || selectedGenre.isEmpty()) {
-            return true;}
+            return true;
+        }
         try {
             Movie.Genre genre = Movie.Genre.valueOf(selectedGenre.toUpperCase());
             return movie.getGenres().contains(genre);
         } catch (IllegalArgumentException e) {
-            return false;}
-    }}
+            return false;
+        }
+    }
+}
