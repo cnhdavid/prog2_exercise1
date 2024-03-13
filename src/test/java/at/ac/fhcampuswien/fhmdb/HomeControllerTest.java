@@ -427,7 +427,7 @@ class HomeControllerTest {
         List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.COMEDY);
 
         // Then
-        assertTrue(filteredMovies.isEmpty());
+        assertTrue(filteredMovies.isEmpty());}
     @Test
     void testSortMoviesAscending() {
         // Given
@@ -452,7 +452,7 @@ class HomeControllerTest {
             assertEquals(expectedMovies.get(i).getTitle(), unsortedMovies.get(i).getTitle());
             assertEquals(expectedMovies.get(i).getDescription(), unsortedMovies.get(i).getDescription());
         }
-    }
+    }}
 
     //Test to check if Movies get sorted as expected in descending Order
     @Test
@@ -480,7 +480,7 @@ class HomeControllerTest {
             assertEquals(expectedMovies.get(i).getTitle(), unsortedMovies.get(i).getTitle());
             assertEquals(expectedMovies.get(i).getDescription(), unsortedMovies.get(i).getDescription());
         }
-    }
+    }}
  @Test
  void testSearchMovies() {
      // Given
