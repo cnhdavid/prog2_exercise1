@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -412,6 +413,59 @@ class HomeControllerTest {
             assertNotNull(movie.getDescription());
             assertNotNull(movie.getGenres());
             assertFalse(movie.getGenres().isEmpty());
+        }
+    }
+    @Test
+    void testSortMoviesAscending() {
+        // Given
+        List<Movie> unsortedMovies = Arrays.asList(
+                new Movie("Title A", "Description A"),
+                new Movie("Title C", "Description C"),
+                new Movie("Title B", "Description B")
+        );
+
+        // When
+        HomeController controller = new HomeController();
+        controller.sortMoviesAscending(unsortedMovies);
+
+        // Then
+        List<Movie> expectedMovies = Arrays.asList(
+                new Movie("Title A", "Description A"),
+                new Movie("Title B", "Description B"),
+                new Movie("Title C", "Description C")
+        );
+
+        for (int i = 0; i < expectedMovies.size(); i++) {
+            assertEquals(expectedMovies.get(i).getTitle(), unsortedMovies.get(i).getTitle());
+            assertEquals(expectedMovies.get(i).getDescription(), unsortedMovies.get(i).getDescription());
+        }
+    }
+
+    //Test to check if Movies get sorted as expected in descending Order
+    @Test
+    void testSortMoviesDescending() {
+        // Given
+        List<Movie> unsortedMovies = Arrays.asList(
+                new Movie("Title A", "Description A"),
+                new Movie("Title C", "Description C"),
+                new Movie("Title B", "Description B")
+        );
+
+        // When
+        HomeController controller = new HomeController();
+        controller.sortMoviesDescending(unsortedMovies);
+
+        // Then
+        List<Movie> expectedMovies = Arrays.asList(
+                new Movie("Title C", "Description C"),
+                new Movie("Title B", "Description B"),
+                new Movie("Title A", "Description A")
+        );
+
+        // Compare each movie individually
+        for (int i = 0; i < expectedMovies.size(); i++) {
+            assertEquals(expectedMovies.get(i).getTitle(), unsortedMovies.get(i).getTitle());
+            assertEquals(expectedMovies.get(i).getDescription(), unsortedMovies.get(i).getDescription());
         }
     }
 }
