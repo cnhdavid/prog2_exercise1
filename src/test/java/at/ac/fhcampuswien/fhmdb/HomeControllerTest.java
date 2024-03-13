@@ -1,11 +1,12 @@
 package at.ac.fhcampuswien.fhmdb;
 
 import at.ac.fhcampuswien.fhmdb.models.Movie;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -13,28 +14,87 @@ class HomeControllerTest {
 
 
     @Test
-    void testDoesGenreMatch() {
-        // Given: A HomeController and a Movie object with a specific genre
+    void test_Filter_Movies_By_Comedy_Genre() {
+        // Given
         HomeController homeController = new HomeController();
-        Movie comedyMovie = new Movie("Comedy Chaos", "", List.of(Movie.Genre.COMEDY));
+        homeController.allMovies = Movie.initializeMovies();
 
-        // When: Checking if the genre matches "COMEDY"
-        boolean matchesComedy = homeController.doesGenreMatch(comedyMovie, "COMEDY");
+        List<String> expectedComedyTitles = List.of("Comedy Chaos");
 
-        // Then: The result should be true as the genre matches
-        assertTrue(matchesComedy, "The COMEDY genre should match.");
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.COMEDY);
 
-        // When: Checking if the genre matches "ACTION"
-        boolean matchesAction = homeController.doesGenreMatch(comedyMovie, "ACTION");
+        // Then
+        assertFalse(filteredMovies.isEmpty());
 
-        // Then: The result should be false as the genres do not match
-        assertFalse(matchesAction, "The ACTION genre should not match.");
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedComedyTitles) && expectedComedyTitles.containsAll(filteredMovieTitles));
+    }
 
-        // When: Checking if the genre matches "ALL"
-        boolean matchesAll = homeController.doesGenreMatch(comedyMovie, "ALL");
+    @Test
+    void test_Filter_Movies_By_Adventure_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
 
-        // Then: The result should be true as "ALL" should accept all genres
-        assertTrue(matchesAll, "All genres should be accepted when 'ALL' is selected.");
+        List<String> expectedComedyTitles = List.of("The Adventure Quest","Sci-Fi Odyssey");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.ADVENTURE);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedComedyTitles) && expectedComedyTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Fantasy_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedComedyTitles = List.of("The Adventure Quest");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.FANTASY);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedComedyTitles) && expectedComedyTitles.containsAll(filteredMovieTitles));
+    }
+
+    @Test
+    public void test_Initialize_Movies() {
+        // Given
+        List<Movie> movies = Movie.initializeMovies();
+
+        // When
+        assertNotNull(movies);
+        assertFalse(movies.isEmpty());
+
+        // Then
+        for (Movie movie : movies) {
+            assertNotNull(movie.getTitle());
+            assertNotNull(movie.getDescription());
+            assertNotNull(movie.getGenres());
+            assertFalse(movie.getGenres().isEmpty());
+        }
     }
 }
+
+
+
+
+
+
+
 
