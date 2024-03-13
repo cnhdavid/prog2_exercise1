@@ -105,8 +105,8 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
 
-    private boolean doesGenreMatch(Movie movie, String selectedGenre) {
-        if (selectedGenre == null || selectedGenre.isEmpty()) {
+    public boolean doesGenreMatch(Movie movie, String selectedGenre) {
+        if ("ALL".equalsIgnoreCase(selectedGenre)) {
             return true;
         }
         try {
