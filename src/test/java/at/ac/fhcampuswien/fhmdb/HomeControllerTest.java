@@ -13,13 +13,16 @@ import static org.junit.jupiter.api.Assertions.*;
 class HomeControllerTest {
 
 
+
+
+    // TestsCase for correct Genre
     @Test
     void test_Filter_Movies_By_Comedy_Genre() {
         // Given
         HomeController homeController = new HomeController();
         homeController.allMovies = Movie.initializeMovies();
 
-        List<String> expectedComedyTitles = List.of("Comedy Chaos");
+        List<String> expectedComedyTitles = List.of("Comedy Chaos","Laugh Therapy","Bleachers of Glory");
 
         // When
         List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.COMEDY);
@@ -39,7 +42,7 @@ class HomeControllerTest {
         HomeController homeController = new HomeController();
         homeController.allMovies = Movie.initializeMovies();
 
-        List<String> expectedComedyTitles = List.of("The Adventure Quest","Sci-Fi Odyssey");
+        List<String> expectedAdventureTitles = List.of("The Adventure Quest","Sci-Fi Odyssey");
 
         // When
         List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.ADVENTURE);
@@ -50,7 +53,7 @@ class HomeControllerTest {
         List<String> filteredMovieTitles = filteredMovies.stream()
                 .map(Movie::getTitle)
                 .collect(Collectors.toList());
-        assertTrue(filteredMovieTitles.containsAll(expectedComedyTitles) && expectedComedyTitles.containsAll(filteredMovieTitles));
+        assertTrue(filteredMovieTitles.containsAll(expectedAdventureTitles) && expectedAdventureTitles.containsAll(filteredMovieTitles));
     }
     @Test
     void test_Filter_Movies_By_Fantasy_Genre() {
@@ -58,7 +61,7 @@ class HomeControllerTest {
         HomeController homeController = new HomeController();
         homeController.allMovies = Movie.initializeMovies();
 
-        List<String> expectedComedyTitles = List.of("The Adventure Quest");
+        List<String> expectedFantasyTitles = List.of("The Adventure Quest","Elysium Odyssey");
 
         // When
         List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.FANTASY);
@@ -69,7 +72,329 @@ class HomeControllerTest {
         List<String> filteredMovieTitles = filteredMovies.stream()
                 .map(Movie::getTitle)
                 .collect(Collectors.toList());
-        assertTrue(filteredMovieTitles.containsAll(expectedComedyTitles) && expectedComedyTitles.containsAll(filteredMovieTitles));
+        assertTrue(filteredMovieTitles.containsAll(expectedFantasyTitles) && expectedFantasyTitles.containsAll(filteredMovieTitles));
+    }
+
+    @Test
+    void test_Filter_Movies_By_Romance_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedRomanceTitles = List.of("Titanic","Comedy Chaos");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.ROMANCE);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedRomanceTitles) && expectedRomanceTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Mystery_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedMysteryTitles = List.of("Mystery Mansion","Frontier Enigma");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.MYSTERY);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedMysteryTitles) && expectedMysteryTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_SCIENCE_FICTION_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedScienceFictionTitles = List.of("Sci-Fi Odyssey","Starstream Chronicles");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.SCIENCE_FICTION);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedScienceFictionTitles) && expectedScienceFictionTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_War_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedWarTitles = List.of("Thunderstrike","No Man's Land of Nightmares","Bunker 13");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.WAR);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedWarTitles) && expectedWarTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Musical_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedMusicalTitles = List.of("Starlight Serenade","Melody Meadows");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.MUSICAL);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedMusicalTitles) && expectedMusicalTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Family_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedFamilyTitles = List.of("Starlight Serenade","Melody Meadows");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.FAMILY);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedFamilyTitles) && expectedFamilyTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Thriller_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedThrillerTitles = List.of("Mystery Mansion","Inferno Protocol");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.THRILLER);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedThrillerTitles) && expectedThrillerTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Horror_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedHorrorTitles = List.of("Bunker 13","No Man's Land of Nightmares");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.HORROR);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedHorrorTitles) && expectedHorrorTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Documentary_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedDocumentaryTitles = List.of("Uncharted Horizons: The Elon Musk Story","Rhythms of Resilience");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.DOCUMENTARY);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedDocumentaryTitles) && expectedDocumentaryTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Biography_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedBiographyTitles = List.of("Uncharted Horizons: The Elon Musk Story","The Wolf of Wall Street");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.BIOGRAPHY);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedBiographyTitles) && expectedBiographyTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Drama_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedDramaTitles = List.of("The Wolf of Wall Street","Titanic","Rhythms of Resilience","Racing Against Fate");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.DRAMA);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedDramaTitles) && expectedDramaTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Western_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedWesternTitles = List.of("Dusty Trails","Shadows of Deceit");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.WESTERN);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedWesternTitles) && expectedWesternTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Sport_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedSportTitles = List.of("Racing Against Fate","Bleachers of Glory");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.SPORT);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedSportTitles) && expectedSportTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Crime_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedCrimeTitles = List.of("Frontier Enigma","Shadows of Deceit");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.CRIME);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedCrimeTitles) && expectedCrimeTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Animation_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedAnimationTitles = List.of("Elysium Odyssey","Starstream Chronicles");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.ANIMATION);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedAnimationTitles) && expectedAnimationTitles.containsAll(filteredMovieTitles));
+    }
+    @Test
+    void test_Filter_Movies_By_Action_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+        List<String> expectedActionTitles = List.of("Inferno Protocol","Thunderstrike");
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.ACTION);
+
+        // Then
+        assertFalse(filteredMovies.isEmpty());
+
+        List<String> filteredMovieTitles = filteredMovies.stream()
+                .map(Movie::getTitle)
+                .collect(Collectors.toList());
+        assertTrue(filteredMovieTitles.containsAll(expectedActionTitles) && expectedActionTitles.containsAll(filteredMovieTitles));
+    }
+
+    //This test checks that filtering by a nonexistent genre yields an empty list.
+    @Test
+    void test_Filter_Movies_By_Nonexistent_Genre() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = Movie.initializeMovies();
+
+
+        Movie.Genre nonExistentGenre = Movie.Genre.UNKNOWN;
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(nonExistentGenre);
+
+        // Then
+        assertTrue(filteredMovies.isEmpty());
     }
 
     @Test
