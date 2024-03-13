@@ -68,30 +68,43 @@ public class HomeController implements Initializable {
         });
     }
     private void sortMoviesAscending() {
-        allMovies.sort(Comparator.comparing(Movie::getTitle));
-        movieListView.setItems(FXCollections.observableArrayList(allMovies));
+        List<Movie> movieList = movieListView.getItems();
+        movieList.sort(Comparator.comparing(Movie::getTitle));
+        movieListView.setItems(FXCollections.observableArrayList(movieList));
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
     private void sortMoviesDescending() {
-        allMovies.sort(Comparator.comparing(Movie::getTitle).reversed());
-        movieListView.setItems(FXCollections.observableArrayList(allMovies));
+        List<Movie> movieList = movieListView.getItems();
+        movieList.sort(Comparator.comparing(Movie::getTitle).reversed());
+        movieListView.setItems(FXCollections.observableArrayList(movieList));
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
     @FXML
     private void filterMovies(ActionEvent event) {
-        Reset();
-        String searchText = searchField.getText().trim().toLowerCase();
-        String Genre = genreComboBox.getValue() != null ? genreComboBox.getValue().toString() : "";
 
+
+
+        String searchText = searchField.getText().trim().toLowerCase();
+        String selectedGenre = (String) genreComboBox.getValue();
+
+
+        // Filter movies based on search text and selected genre
         List<Movie> filteredMovies = allMovies.stream()
-                .filter(movie -> movie.getTitle().toLowerCase().contains(searchText) || movie.getDescription().toLowerCase().contains(searchText))
-                .filter(movie -> DoesGenreMatch(movie, Genre))
+                .filter(movie -> searchText.isEmpty() ||
+                        movie.getTitle().toLowerCase().contains(searchText) ||
+                        movie.getDescription().toLowerCase().contains(searchText))
+                .filter(movie -> selectedGenre == null ||
+                        movie.getGenres().contains(Movie.Genre.valueOf(selectedGenre)))
                 .collect(Collectors.toList());
+        Reset();
         movieListView.setItems(FXCollections.observableArrayList(filteredMovies));
         movieListView.setCellFactory(movieListView -> new MovieCell());
+        filteredMovies.clear();
+
     }
+
     private void Reset() {
-        genreComboBox.setValue(null);
+
         movieListView.setItems(FXCollections.observableArrayList(allMovies));
         movieListView.setCellFactory(movieListView -> new MovieCell());}
     private boolean DoesGenreMatch(Movie movie, String selectedGenre) {
