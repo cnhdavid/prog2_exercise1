@@ -120,6 +120,12 @@ public class HomeController implements Initializable {
         filteredMovies.clear();
 
     }
+    public List<Movie> filterMovies(List<Movie> movies, String query) {
+        // Use stream and filter to find movies that contain the query in their title
+        return movies.stream()
+                .filter(movie -> movie.getTitle().toLowerCase().contains(query.toLowerCase()))
+                .collect(Collectors.toList());
+    }
 
     private void Reset() {
 

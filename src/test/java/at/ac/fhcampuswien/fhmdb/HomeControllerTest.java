@@ -415,6 +415,19 @@ class HomeControllerTest {
             assertFalse(movie.getGenres().isEmpty());
         }
     }
+    // Checks if list is empty
+    // Checks if list is empty
+    @Test
+    void test_Filter_Movies_With_Empty_List() {
+        // Given
+        HomeController homeController = new HomeController();
+        homeController.allMovies = new ArrayList<>(); // sets an empty MovieList
+
+        // When
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.COMEDY);
+
+        // Then
+        assertTrue(filteredMovies.isEmpty());
     @Test
     void testSortMoviesAscending() {
         // Given
@@ -468,6 +481,45 @@ class HomeControllerTest {
             assertEquals(expectedMovies.get(i).getDescription(), unsortedMovies.get(i).getDescription());
         }
     }
+ @Test
+ void testSearchMovies() {
+     // Given
+     List<Movie> movies = Arrays.asList(
+             new Movie("Title A", "Description A"),
+             new Movie("Title B", "Description B"),
+             new Movie("Title C", "Description C")
+     );
+
+     HomeController controller = new HomeController();
+
+     // When searching for "Title A"
+     String query = "Title A";
+     List<Movie> searchResult = controller.filterMovies(movies, query);
+
+     // Then
+     assertEquals(1, searchResult.size());
+     assertEquals("Title A", searchResult.get(0).getTitle());
+
+     // When searching for "Title"
+     query = "Title";
+     searchResult = controller.filterMovies(movies, query);
+
+     // Then
+     assertEquals(3, searchResult.size());
+     assertTrue(searchResult.stream().anyMatch(movie -> movie.getTitle().equals("Title A")));
+     assertTrue(searchResult.stream().anyMatch(movie -> movie.getTitle().equals("Title B")));
+     assertTrue(searchResult.stream().anyMatch(movie -> movie.getTitle().equals("Title C")));
+
+
+
+     // When searching for "Unknown Title"
+     query = "Unknown Title";
+     searchResult = controller.filterMovies(movies, query);
+
+     // Then
+     assertTrue(searchResult.isEmpty());
+ }
+
 }
 
 
