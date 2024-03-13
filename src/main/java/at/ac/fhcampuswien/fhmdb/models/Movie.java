@@ -56,6 +56,14 @@ public class Movie {
                 List.of(Genre.SCIENCE_FICTION, Genre.ADVENTURE));
         movies.add(movie4);
 
+        Movie movie5 = new Movie("The Wolf of Wall Street", "The Wolf of Wall Street is a high-octane biographical drama that follows the rise and fall of Jordan Belfort, a charismatic stockbroker who indulges in a hedonistic lifestyle of excess and corruption in the 1990s.",
+                List.of(Genre.BIOGRAPHY, Genre.DRAMA));
+        movies.add(movie5);
+
+        Movie movie6 = new Movie("Titanic", "Titanic is a romantic drama that intertwines the tragic historical sinking of the RMS Titanic with a poignant love story between Jack, a penniless artist, and Rose, a wealthy young woman, set against the backdrop of the ill-fated maiden voyage.",
+                List.of(Genre.ROMANCE, Genre.DRAMA));
+        movies.add(movie6);
+
 
         return movies;
 
