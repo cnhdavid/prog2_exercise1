@@ -13,6 +13,15 @@ public class Movie {
         this.description = description;
         this.genres = genres;
     }
+    public Movie(String title, String description) {
+        this.title = title;
+        this.description = description;
+
+    }
+    @Override
+    public String toString() {
+        return "Movie: " + title;
+    }
 
     public enum Genre {
         ALL, ACTION, ADVENTURE, ANIMATION, BIOGRAPHY, COMEDY, CRIME, DRAMA,
