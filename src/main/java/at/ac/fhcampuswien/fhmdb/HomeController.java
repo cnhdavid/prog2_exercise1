@@ -48,7 +48,7 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
-        genreComboBox.setPromptText("Filter by Genre");
+        genreComboBox.setPromptText("Select Genre");
         genreComboBox.getItems().addAll("ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
                 "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
                 "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
