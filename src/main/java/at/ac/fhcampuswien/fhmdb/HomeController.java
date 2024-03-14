@@ -56,7 +56,7 @@ public class HomeController implements Initializable {
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
-            if(sortBtn.getText().equals("Sort (asc)")) {
+            if (sortBtn.getText().equals("Sort (asc)")) {
 
                 sortBtn.setText("Sort (desc)");
                 sortMoviesAscending();
@@ -67,8 +67,8 @@ public class HomeController implements Initializable {
             }
         });
     }
-    void sortMoviesAscending(List<Movie> unsortedMovies) {
 
+    void sortMoviesAscending(List<Movie> unsortedMovies) {
         unsortedMovies.sort(Comparator.comparing(Movie::getTitle));
         System.out.println("Sorted Movies:");
         for (Movie movie : unsortedMovies) {
@@ -76,8 +76,8 @@ public class HomeController implements Initializable {
         }
 
     }
-    void sortMoviesDescending(List<Movie> unsortedMovies) {
 
+    void sortMoviesDescending(List<Movie> unsortedMovies) {
         unsortedMovies.sort(Comparator.comparing(Movie::getTitle).reversed());
         System.out.println("Sorted Movies:");
         for (Movie movie : unsortedMovies) {
@@ -85,26 +85,25 @@ public class HomeController implements Initializable {
         }
 
     }
+
     private void sortMoviesAscending() {
         List<Movie> movieList = movieListView.getItems();
         movieList.sort(Comparator.comparing(Movie::getTitle));
         movieListView.setItems(FXCollections.observableArrayList(movieList));
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
+
     private void sortMoviesDescending() {
         List<Movie> movieList = movieListView.getItems();
         movieList.sort(Comparator.comparing(Movie::getTitle).reversed());
         movieListView.setItems(FXCollections.observableArrayList(movieList));
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
+
     @FXML
     private void filterMovies(ActionEvent event) {
-
-
-
         String searchText = searchField.getText().trim().toLowerCase();
         String selectedGenre = (String) genreComboBox.getValue();
-
 
         // Filter movies based on search text and selected genre
         List<Movie> filteredMovies = allMovies.stream()
@@ -120,6 +119,7 @@ public class HomeController implements Initializable {
         filteredMovies.clear();
 
     }
+
     public List<Movie> filterMovies(List<Movie> movies, String query) {
         // Use stream and filter to find movies that contain the query in their title
         return movies.stream()
@@ -128,19 +128,11 @@ public class HomeController implements Initializable {
     }
 
     private void Reset() {
-
         movieListView.setItems(FXCollections.observableArrayList(allMovies));
-        movieListView.setCellFactory(movieListView -> new MovieCell());}
-
-    private boolean DoesGenreMatch(Movie movie, String selectedGenre) {
-        if (selectedGenre == null || selectedGenre.isEmpty()) {
-            return true;}
-        try {
-            Movie.Genre genre = Movie.Genre.valueOf(selectedGenre.toUpperCase());
-            return movie.getGenres().contains(genre);
-        } catch (IllegalArgumentException e) {
-            return false;}
+        movieListView.setCellFactory(movieListView -> new MovieCell());
     }
+
+
     public List<Movie> filterMoviesByGenre(Movie.Genre genre) {
         return allMovies.stream()
                 .filter(movie -> movie.getGenres().contains(genre))
