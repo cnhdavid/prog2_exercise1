@@ -21,6 +21,9 @@ public class HomeController implements Initializable {
     public JFXButton searchBtn;
 
     @FXML
+    public JFXButton clearBtn;
+
+    @FXML
     public TextField searchField;
 
     @FXML
@@ -120,6 +123,16 @@ public class HomeController implements Initializable {
 
     }
 
+    @FXML
+    private void clearFilters() {
+        searchField.setText("");
+
+        genreComboBox.getSelectionModel().clearSelection();
+
+        movieListView.setItems(FXCollections.observableArrayList(allMovies));
+        movieListView.setCellFactory(movieListView -> new MovieCell());
+    }
+
     public List<Movie> filterMovies(List<Movie> movies, String query) {
         // Use stream and filter to find movies that contain the query in their title
         return movies.stream()
@@ -138,5 +151,6 @@ public class HomeController implements Initializable {
                 .filter(movie -> movie.getGenres().contains(genre))
                 .collect(Collectors.toList());
     }
+
 
 }
