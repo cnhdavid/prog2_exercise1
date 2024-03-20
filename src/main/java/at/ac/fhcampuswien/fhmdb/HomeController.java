@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
 import com.jfoenix.controls.JFXButton;
@@ -49,10 +50,7 @@ public class HomeController implements Initializable {
 
         // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Select Genre");
-        genreComboBox.getItems().addAll("ACTION", "ADVENTURE", "ANIMATION", "BIOGRAPHY", "COMEDY",
-                "CRIME", "DRAMA", "DOCUMENTARY", "FAMILY", "FANTASY", "HISTORY", "HORROR",
-                "MUSICAL", "MYSTERY", "ROMANCE", "SCIENCE_FICTION", "SPORT", "THRILLER", "WAR",
-                "WESTERN");
+        genreComboBox.getItems().addAll(Arrays.stream(Genre.MovieGenre.values()).map(Enum::name).collect(Collectors.toList()));
 
         // TODO add event handlers to buttons and call the regarding methods
         // either set event handlers in the fxml file (onAction) or add them here
@@ -114,7 +112,7 @@ public class HomeController implements Initializable {
                         movie.getTitle().toLowerCase().contains(searchText) ||
                         movie.getDescription().toLowerCase().contains(searchText))
                 .filter(movie -> selectedGenre == null ||
-                        movie.getGenres().contains(Movie.Genre.valueOf(selectedGenre)))
+                        movie.getGenres().contains(Genre.MovieGenre.valueOf(selectedGenre)))
                 .collect(Collectors.toList());
         Reset();
         movieListView.setItems(FXCollections.observableArrayList(filteredMovies));
@@ -146,7 +144,7 @@ public class HomeController implements Initializable {
     }
 
 
-    public List<Movie> filterMoviesByGenre(Movie.Genre genre) {
+    public List<Movie> filterMoviesByGenre(Genre.MovieGenre genre) {
         return allMovies.stream()
                 .filter(movie -> movie.getGenres().contains(genre))
                 .collect(Collectors.toList());

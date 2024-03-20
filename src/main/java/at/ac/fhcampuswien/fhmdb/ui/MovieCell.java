@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb.ui;
 
+import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import javafx.geometry.Insets;
 import javafx.scene.control.Label;
@@ -31,7 +32,7 @@ public class MovieCell extends ListCell<Movie> {
 
             // Display genres Quelle: chat.openai.com
             String genreText = "Genres: ";
-            for (Movie.Genre genre : movie.getGenres()) {
+            for (Genre.MovieGenre genre : movie.getGenres()) {
                 genreText += genre.toString() + ", ";
             }
             // Remove the last comma and space Quelle: chat.openai.com

@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +27,7 @@ class HomeControllerTest {
         List<String> expectedComedyTitles = List.of("Comedy Chaos","Laugh Therapy","Bleachers of Glory");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.COMEDY);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.COMEDY);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -46,7 +47,7 @@ class HomeControllerTest {
         List<String> expectedAdventureTitles = List.of("The Adventure Quest","Sci-Fi Odyssey");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.ADVENTURE);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.ADVENTURE);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -65,7 +66,7 @@ class HomeControllerTest {
         List<String> expectedFantasyTitles = List.of("The Adventure Quest","Elysium Odyssey");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.FANTASY);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.FANTASY);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -85,7 +86,7 @@ class HomeControllerTest {
         List<String> expectedRomanceTitles = List.of("Titanic","Comedy Chaos");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.ROMANCE);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.ROMANCE);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -104,7 +105,7 @@ class HomeControllerTest {
         List<String> expectedMysteryTitles = List.of("Mystery Mansion","Frontier Enigma");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.MYSTERY);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.MYSTERY);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -123,7 +124,7 @@ class HomeControllerTest {
         List<String> expectedScienceFictionTitles = List.of("Sci-Fi Odyssey","Starstream Chronicles");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.SCIENCE_FICTION);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.SCIENCE_FICTION);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -142,7 +143,7 @@ class HomeControllerTest {
         List<String> expectedWarTitles = List.of("Thunderstrike","No Man's Land of Nightmares","Bunker 13");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.WAR);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.WAR);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -161,7 +162,7 @@ class HomeControllerTest {
         List<String> expectedMusicalTitles = List.of("Starlight Serenade","Melody Meadows");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.MUSICAL);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.MUSICAL);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -180,7 +181,7 @@ class HomeControllerTest {
         List<String> expectedFamilyTitles = List.of("Starlight Serenade","Melody Meadows");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.FAMILY);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.FAMILY);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -199,7 +200,7 @@ class HomeControllerTest {
         List<String> expectedThrillerTitles = List.of("Mystery Mansion","Inferno Protocol");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.THRILLER);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.THRILLER);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -218,7 +219,7 @@ class HomeControllerTest {
         List<String> expectedHorrorTitles = List.of("Bunker 13","No Man's Land of Nightmares");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.HORROR);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.HORROR);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -237,7 +238,7 @@ class HomeControllerTest {
         List<String> expectedDocumentaryTitles = List.of("Uncharted Horizons: The Elon Musk Story","Rhythms of Resilience");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.DOCUMENTARY);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.DOCUMENTARY);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -256,7 +257,7 @@ class HomeControllerTest {
         List<String> expectedBiographyTitles = List.of("Uncharted Horizons: The Elon Musk Story","The Wolf of Wall Street");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.BIOGRAPHY);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.BIOGRAPHY);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -275,7 +276,7 @@ class HomeControllerTest {
         List<String> expectedDramaTitles = List.of("The Wolf of Wall Street","Titanic","Rhythms of Resilience","Racing Against Fate");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.DRAMA);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.DRAMA);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -294,7 +295,7 @@ class HomeControllerTest {
         List<String> expectedWesternTitles = List.of("Dusty Trails","Shadows of Deceit");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.WESTERN);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.WESTERN);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -313,7 +314,7 @@ class HomeControllerTest {
         List<String> expectedSportTitles = List.of("Racing Against Fate","Bleachers of Glory");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.SPORT);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.SPORT);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -332,7 +333,7 @@ class HomeControllerTest {
         List<String> expectedCrimeTitles = List.of("Frontier Enigma","Shadows of Deceit");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.CRIME);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.CRIME);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -351,7 +352,7 @@ class HomeControllerTest {
         List<String> expectedAnimationTitles = List.of("Elysium Odyssey","Starstream Chronicles");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.ANIMATION);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.ANIMATION);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -370,7 +371,7 @@ class HomeControllerTest {
         List<String> expectedActionTitles = List.of("Inferno Protocol","Thunderstrike");
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.ACTION);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.ACTION);
 
         // Then
         assertFalse(filteredMovies.isEmpty());
@@ -389,7 +390,7 @@ class HomeControllerTest {
         homeController.allMovies = Movie.initializeMovies();
 
 
-        Movie.Genre nonExistentGenre = Movie.Genre.UNKNOWN;
+        Genre.MovieGenre nonExistentGenre = Genre.MovieGenre.UNKNOWN;
 
         // When
         List<Movie> filteredMovies = homeController.filterMoviesByGenre(nonExistentGenre);
@@ -424,7 +425,7 @@ class HomeControllerTest {
         homeController.allMovies = new ArrayList<>(); // sets an empty MovieList
 
         // When
-        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Movie.Genre.COMEDY);
+        List<Movie> filteredMovies = homeController.filterMoviesByGenre(Genre.MovieGenre.COMEDY);
 
         // Then
         assertTrue(filteredMovies.isEmpty());}
