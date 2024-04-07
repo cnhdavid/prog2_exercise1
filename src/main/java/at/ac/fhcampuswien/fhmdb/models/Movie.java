@@ -1,17 +1,20 @@
 package at.ac.fhcampuswien.fhmdb.models;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Movie {
     private String title;
     private String description;
     private List<Genre.MovieGenre> genres = new ArrayList<>();
+    private List<String> mainCast;
 
     public Movie(String title, String description, List<Genre.MovieGenre> genres) {
         this.title = title;
         this.description = description;
         this.genres = genres;
+        this.mainCast = mainCast;
     }
     public Movie(String title, String description) {
         this.title = title;
@@ -136,4 +139,11 @@ public class Movie {
 
     }
 
+    public List<String> getMainCast() {
+        return mainCast;
+    }
+
+    public Object getDirector() {
+        return null;
+    }
 }

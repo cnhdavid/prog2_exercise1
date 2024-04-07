@@ -153,6 +153,54 @@ public class HomeController implements Initializable {
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
 
+    public int getLongestMovieTitle(List<Movie> movies) {
+        // Use streams to map each movie to its title length and find the maximum title length
+        return movies.stream()
+                .mapToInt(movie -> movie.getTitle().length())
+                .max()
+                .orElse(0); // Return 0 if the list of movies is empty
+    }
+
+    public String getMostPopularActor(List<Movie> movies) {
+        // Use streams to flatMap the main cast of each movie and collect them into a single list
+        List<String> allActors = movies.stream()
+                .flatMap(movie -> movie.getMainCast().stream())
+                .collect(Collectors.toList());
+
+        // Use Collectors.groupingBy to count occurrences of each actor
+        Map<String, Long> actorCountMap = allActors.stream()
+                .collect(Collectors.groupingBy(
+                        actor -> actor,
+                        Collectors.counting()
+                ));
+
+        // Find the actor with the maximum occurrence count
+        Optional<Map.Entry<String, Long>> mostPopularActorEntry = actorCountMap.entrySet().stream()
+                .max(Map.Entry.comparingByValue());
+
+        // Return the most popular actor
+        return mostPopularActorEntry.map(Map.Entry::getKey).orElse(null);
+    }
+
+    public long countMoviesFrom(List<Movie> movies, String director) {
+        // Use streams to filter movies by the specified director and count them
+        return movies.stream()
+                .filter(movie -> movie.getDirector().equals(director))
+                .count();
+    }
+
+    public static void main(String[] args) {
+        // Create some sample movies
+        List<Movie> movies = Movie.initializeMovies();
+
+        // Create an instance of HomeController
+        HomeController controller = new HomeController();
+
+        // Call the getLongestMovieTitle method and print the result
+        int longestTitleLength = controller.getLongestMovieTitle(movies);
+        System.out.println("Longest movie title length: " + longestTitleLength);
+    }
+
 
     public List<Movie> filterMoviesByGenre(Genre.MovieGenre genre) {
         return allMovies.stream()
