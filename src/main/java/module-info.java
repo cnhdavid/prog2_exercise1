@@ -4,6 +4,7 @@ module at.ac.fhcampuswien.fhmdb {
 
     requires com.jfoenix;
     requires okhttp3;
+    requires com.google.gson;
 
     opens at.ac.fhcampuswien.fhmdb;
     exports at.ac.fhcampuswien.fhmdb;

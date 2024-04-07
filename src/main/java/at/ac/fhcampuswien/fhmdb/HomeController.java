@@ -1,5 +1,6 @@
 package at.ac.fhcampuswien.fhmdb;
 
+import at.ac.fhcampuswien.fhmdb.api.MovieAPI;
 import at.ac.fhcampuswien.fhmdb.models.Genre;
 import at.ac.fhcampuswien.fhmdb.models.Movie;
 import at.ac.fhcampuswien.fhmdb.ui.MovieCell;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -38,8 +40,9 @@ public class HomeController implements Initializable {
 
     public List<Movie> allMovies = Movie.initializeMovies();
 
-    private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList();   // automatically updates corresponding UI elements when underlying data changes
+    private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList(); // automatically updates corresponding UI elements when underlying data changes
 
+    private final MovieAPI movieAPI = new MovieAPI();
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         observableMovies.addAll(allMovies);         // add dummy data to observable list
@@ -106,6 +109,13 @@ public class HomeController implements Initializable {
         String searchText = searchField.getText().trim().toLowerCase();
         String selectedGenre = (String) genreComboBox.getValue();
 
+        try {
+            List<Movie> filteredMovies = movieAPI.fetchMovies(searchText, selectedGenre);
+            movieListView.setItems(FXCollections.observableArrayList(filteredMovies));
+        } catch (IOException e) {
+            e.printStackTrace();
+            // Fehlerbehandlung...
+        }
         // Filter movies based on search text and selected genre
         List<Movie> filteredMovies = allMovies.stream()
                 .filter(movie -> searchText.isEmpty() ||
@@ -149,6 +159,5 @@ public class HomeController implements Initializable {
                 .filter(movie -> movie.getGenres().contains(genre))
                 .collect(Collectors.toList());
     }
-
 
 }
