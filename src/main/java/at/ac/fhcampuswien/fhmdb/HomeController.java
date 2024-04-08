@@ -38,25 +38,25 @@ public class HomeController implements Initializable {
     @FXML
     public JFXButton sortBtn;
 
-    public List<Movie> allMovies = Movie.initializeMovies();
+    //public List<Movie> allMovies = Movie.initializeMovies();
 
     private final ObservableList<Movie> observableMovies = FXCollections.observableArrayList(); // automatically updates corresponding UI elements when underlying data changes
 
     private final MovieAPI movieAPI = new MovieAPI();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        observableMovies.addAll(allMovies);         // add dummy data to observable list
-
         // initialize UI stuff
-        movieListView.setItems(observableMovies);   // set data of observable list to list view
-        movieListView.setCellFactory(movieListView -> new MovieCell()); // use custom cell factory to display data
-
-        // TODO add genre filter items with genreComboBox.getItems().addAll(...)
         genreComboBox.setPromptText("Select Genre");
         genreComboBox.getItems().addAll(Arrays.stream(Genre.MovieGenre.values()).map(Enum::name).collect(Collectors.toList()));
 
-        // TODO add event handlers to buttons and call the regarding methods
-        // either set event handlers in the fxml file (onAction) or add them here
+        try {
+            List<Movie> movies = movieAPI.fetchMovies("", "");
+            movieListView.setItems(FXCollections.observableArrayList(movies));
+        } catch (IOException e) {
+            e.printStackTrace();
+
+        }
 
         // Sort button example:
         sortBtn.setOnAction(actionEvent -> {
@@ -105,7 +105,7 @@ public class HomeController implements Initializable {
     }
 
     @FXML
-    private void filterMovies(ActionEvent event) {
+    private void filterMovies(ActionEvent event) throws IOException {
         String searchText = searchField.getText().trim().toLowerCase();
         String selectedGenre = (String) genreComboBox.getValue();
 
@@ -117,7 +117,7 @@ public class HomeController implements Initializable {
             // Fehlerbehandlung...
         }
         // Filter movies based on search text and selected genre
-        List<Movie> filteredMovies = allMovies.stream()
+        List<Movie> filteredMovies = movieAPI.fetchMovies(searchText, selectedGenre).stream()
                 .filter(movie -> searchText.isEmpty() ||
                         movie.getTitle().toLowerCase().contains(searchText) ||
                         movie.getDescription().toLowerCase().contains(searchText))
@@ -137,7 +137,7 @@ public class HomeController implements Initializable {
 
         genreComboBox.getSelectionModel().clearSelection();
 
-        movieListView.setItems(FXCollections.observableArrayList(allMovies));
+        movieListView.setItems(FXCollections.observableArrayList(movieAPI));
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
 
@@ -149,7 +149,7 @@ public class HomeController implements Initializable {
     }
 
     private void Reset() {
-        movieListView.setItems(FXCollections.observableArrayList(allMovies));
+        movieListView.setItems(FXCollections.observableArrayList(movieAPI));
         movieListView.setCellFactory(movieListView -> new MovieCell());
     }
 
@@ -189,6 +189,7 @@ public class HomeController implements Initializable {
                 .count();
     }
 
+    /*
     public static void main(String[] args) {
         // Create some sample movies
         List<Movie> movies = Movie.initializeMovies();
@@ -201,11 +202,15 @@ public class HomeController implements Initializable {
         System.out.println("Longest movie title length: " + longestTitleLength);
     }
 
+     */
 
+    /*
     public List<Movie> filterMoviesByGenre(Genre.MovieGenre genre) {
         return allMovies.stream()
                 .filter(movie -> movie.getGenres().contains(genre))
                 .collect(Collectors.toList());
     }
+
+     */
 
 }

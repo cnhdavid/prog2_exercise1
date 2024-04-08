@@ -9,6 +9,8 @@ public class Movie {
     private String description;
     private List<Genre.MovieGenre> genres = new ArrayList<>();
     private List<String> mainCast;
+    private int releaseYear;
+    private double rating;
 
     public Movie(String title, String description, List<Genre.MovieGenre> genres) {
         this.title = title;
@@ -21,11 +23,11 @@ public class Movie {
         this.description = description;
 
     }
+
     @Override
     public String toString() {
         return "Movie: " + title;
     }
-
 
     public String getTitle() {
         return title;
@@ -40,8 +42,12 @@ public class Movie {
     }
 
     // Initialisierung der Movies
+    /*
     public static List<Movie> initializeMovies() {
+
+
         List<Movie> movies = new ArrayList<>();
+
 
         // Movie 1
         Movie movie1 = new Movie("The Adventure Quest", "Join our heroes on an epic journey filled with danger, excitement, and  twists as they embark on the ultimate adventure quest to save the world.",
@@ -136,8 +142,9 @@ public class Movie {
         movies.add(movie22);
 
         return movies;
-
     }
+
+     */
 
     public List<String> getMainCast() {
         return mainCast;
